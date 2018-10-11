@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -16,18 +17,24 @@ public class EnemyAI : MonoBehaviour
     float distance;
     Rigidbody rgb;
     Transform player;
+    HP LaoHu;
+    Image hhhp;
     private void Start()
     {
         birth = transform.position;
         rgb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        hhhp = GetComponentInChildren<Image>();
+        LaoHu = new HP(100);
     }
     private void FixedUpdate()
     {
+        hhhp.fillAmount = (float)LaoHu.HPChange / 100;
         distance = Vector3.Distance(player.position,transform.position);
         if (distance <= 8)
         {
             Vector3 zhuan = player.position - rgb.position;
+            zhuan.y = transform.position.y;
             Quaternion dir = Quaternion.LookRotation(zhuan,Vector3.up);
             rgb.MoveRotation(Quaternion.Slerp(rgb.rotation, dir, 10 * Time.deltaTime));
             if (distance >= 2)
@@ -44,10 +51,11 @@ public class EnemyAI : MonoBehaviour
             }
             movePoint = new Vector3(moveX,rgb.position.y, moveZ);
             Vector3 xunluozhuan = movePoint - rgb.position;
+            xunluozhuan.y = transform.position.y;
             Quaternion xunluo;
             if (xunluozhuan != new Vector3(0, 0, 0))
-            { xunluo = Quaternion.LookRotation(xunluozhuan); }
-            else xunluo = Quaternion.LookRotation(transform.forward);
+            { xunluo = Quaternion.LookRotation(xunluozhuan,Vector3.up); }
+            else xunluo = Quaternion.LookRotation(transform.forward,Vector3.up);
             switch (ran)
             {
                 case 0:
@@ -65,6 +73,16 @@ public class EnemyAI : MonoBehaviour
                     Debug.Log("跑"+ran);
                     break;
             }
+        }
+    }
+    public void OnPlayerAttack(int hurt)
+    {
+        LaoHu.HPChange = hurt;
+        Debug.Log("敌人生命值减少" + hurt + "，敌人剩余生命为" + LaoHu.HPChange);
+        if (LaoHu.HPChange == 0)
+        {
+            Destroy(gameObject);
+            Debug.Log("敌人死亡");
         }
     }
 }

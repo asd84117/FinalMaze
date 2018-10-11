@@ -27,7 +27,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 //按键攻击造成伤害,调用EnemyHP
                 Debug.Log("角色进行攻击");
-                Enemys[i].GetComponent<EnemyHP>().OnPlayerAttack(5);
+                Enemys[i].GetComponent<EnemyAI>().OnPlayerAttack(5);
             }
         }           
     }
