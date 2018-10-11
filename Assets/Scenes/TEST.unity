@@ -126,9 +126,10 @@ GameObject:
   - component: {fileID: 267952086}
   - component: {fileID: 267952091}
   - component: {fileID: 267952090}
-  m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
+  - component: {fileID: 267952092}
+  m_Layer: 8
+  m_Name: Enemy
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -227,6 +228,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &267952092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 267952085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79e738358a252b94886d0e18577ca631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &328000113
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,7 +316,7 @@ GameObject:
   - component: {fileID: 1242962540}
   - component: {fileID: 1242962539}
   - component: {fileID: 1242962538}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -478,8 +490,9 @@ GameObject:
   - component: {fileID: 1612655312}
   - component: {fileID: 1612655311}
   - component: {fileID: 1612655310}
-  m_Layer: 0
-  m_Name: Capsule
+  - component: {fileID: 1612655316}
+  m_Layer: 9
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -541,7 +554,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 217d4deea9c21c34495aad00cbb1fae4, type: 2}
+  - {fileID: 2100000, guid: 624ec323443c3794190748f524058516, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -575,13 +588,24 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1612655309}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5705746, y: 0.29, z: -1.96}
+  m_LocalPosition: {x: -1.15, y: 0.29, z: 0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1242962537}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1612655316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1612655309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4abe34942e0bd44479b3f3a1292f2ca7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1706645226
 GameObject:
   m_ObjectHideFlags: 0

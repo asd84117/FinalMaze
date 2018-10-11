@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OnAttack : MonoBehaviour
+public class EnemyHP : MonoBehaviour
 {
-    HP LaoHu = new HP(100);
+    public HP LaoHu = new HP(100);
     public void OnPlayerAttack(int hurt)
     {
         LaoHu.HPChange = hurt;
@@ -12,6 +12,7 @@ public class OnAttack : MonoBehaviour
         if(LaoHu.HPChange==0)
         {
             Destroy(gameObject);
+            Debug.Log("敌人死亡");
         }
     }    
 }

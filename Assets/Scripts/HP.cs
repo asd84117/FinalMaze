@@ -13,7 +13,7 @@ public class HP
     }
     public int HPChange
     {
-        get { return Mathf.Clamp(hp,0,100); }
+        get { return Mathf.Clamp(hp,0,MaxHP); }
         set { hp -= value; }
     }
 }
