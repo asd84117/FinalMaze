@@ -4,50 +4,65 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    float ThinkTime = 2;
-    float LastThinkTime;
-    float MoveSpeed=4;
+    Vector3 birth;//中心点
+    Vector3 movePoint;//巡逻目标点
+    float moveX;
+    float moveZ;
+    int ran;
+    int walkRange=8;//巡逻距离
+    int attackRange;//检测攻击距离
+    int thinkTime=2;
+    float lastThinkTime;
+    float distance;
+    Rigidbody rgb;
     Transform player;
-    float distance=5;
     private void Start()
     {
+        birth = transform.position;
+        rgb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
     private void FixedUpdate()
     {
-        if (Vector3.Distance(transform.position,player.position) <= distance&& Vector3.Distance(transform.position, player.position)>=2)
+        distance = Vector3.Distance(player.position,transform.position);
+        if (distance >= 2 && distance <= 8)
         {
-            //run动画
-
-            transform.LookAt(player.position);
-            transform.Translate(Vector3.forward * Time.deltaTime * MoveSpeed);
-        }
-        else
+            Vector3 zhuan = player.position - rgb.position;
+            Quaternion dir = Quaternion.LookRotation(zhuan,Vector3.up);
+            rgb.MoveRotation(Quaternion.Slerp(rgb.rotation, dir, 10 * Time.deltaTime));
+            rgb.MovePosition(rgb.position + transform.forward * Time.deltaTime * 4);
+        }else if(distance>5)
         {
-            if(Time.time-LastThinkTime>ThinkTime)
+            if (Time.time - lastThinkTime > thinkTime)
             {
-                LastThinkTime = Time.time;
-                Debug.Log("开始");
-                int ran = Random.Range(0, 4);
-                switch (ran)
-                {
-                    case 1:
-                        Debug.Log("开始000");
-                        //播放idle动画
-                        break;
-                    case 2:
-                        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, Random.Range(1, 5) * 90, 0), 8);
-                        transform.Translate(Vector3.forward * Time.deltaTime * 3);
-                        //播放walk动画
-                        Debug.Log("开始111");
-                        break;
-                    case 3:
-                        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, Random.Range(1, 5) * 90, 0), 8);
-                        transform.Translate(Vector3.forward * Time.deltaTime * 5);
-                        //播放run动画
-                        Debug.Log("开始222");
-                        break;
-                }
+                lastThinkTime = Time.time;
+                moveX = Random.Range(birth.x - walkRange, birth.x + walkRange);
+                moveZ = Random.Range(birth.z - walkRange, birth.z + walkRange);
+                ran = Random.Range(0, 3);
+                //Debug.Log(ran);
+            }
+            movePoint = new Vector3(moveX,rgb.position.y, moveZ);
+            Vector3 xunluozhuan = movePoint - rgb.position;
+            Quaternion xunluo;
+            if (xunluozhuan != new Vector3(0, 0, 0))
+            { xunluo = Quaternion.LookRotation(xunluozhuan); }
+            else xunluo = Quaternion.LookRotation(transform.forward);
+            switch (ran)
+            {
+                case 0:
+                    //播放idle动画
+                    Debug.Log(ran);
+                    break;
+                case 1:
+                    rgb.MoveRotation(Quaternion.Slerp(rgb.rotation, xunluo, Time.deltaTime * 10));
+                    rgb.MovePosition(Vector3.MoveTowards(rgb.position, movePoint, Time.deltaTime * 2));
+                    Debug.Log("走"+ran);
+                    break;
+                case 2:
+                    rgb.MoveRotation(Quaternion.Slerp(rgb.rotation, xunluo, Time.deltaTime * 10));
+                    rgb.MovePosition(Vector3.MoveTowards(rgb.position, movePoint, Time.deltaTime * 4));
+                    Debug.Log("跑"+ran);
+                    break;
             }
         }
     }
