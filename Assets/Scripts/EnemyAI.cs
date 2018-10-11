@@ -25,12 +25,13 @@ public class EnemyAI : MonoBehaviour
     private void FixedUpdate()
     {
         distance = Vector3.Distance(player.position,transform.position);
-        if (distance >= 2 && distance <= 8)
+        if (distance <= 8)
         {
             Vector3 zhuan = player.position - rgb.position;
             Quaternion dir = Quaternion.LookRotation(zhuan,Vector3.up);
             rgb.MoveRotation(Quaternion.Slerp(rgb.rotation, dir, 10 * Time.deltaTime));
-            rgb.MovePosition(rgb.position + transform.forward * Time.deltaTime * 4);
+            if (distance >= 2)
+            { rgb.MovePosition(rgb.position + transform.forward * Time.deltaTime * 4); }
         }else if(distance>5)
         {
             if (Time.time - lastThinkTime > thinkTime)
