@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class EnemyAI : MonoBehaviour
 {
+    public Texture2D blood;
     Vector3 birth;//中心点
     Vector3 movePoint;//巡逻目标点
     float moveX;
@@ -29,12 +30,11 @@ public class EnemyAI : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        hhhp.fillAmount = (float)LaoHu.HPChange / 100;
         distance = Vector3.Distance(player.position,transform.position);
         if (distance <= 8)
         {
             Vector3 zhuan = player.position - rgb.position;
-            zhuan.y = transform.position.y;
+            zhuan.y = 0;
             Quaternion dir = Quaternion.LookRotation(zhuan,Vector3.up);
             rgb.MoveRotation(Quaternion.Slerp(rgb.rotation, dir, 10 * Time.deltaTime));
             if (distance >= 2)
@@ -51,11 +51,11 @@ public class EnemyAI : MonoBehaviour
             }
             movePoint = new Vector3(moveX,rgb.position.y, moveZ);
             Vector3 xunluozhuan = movePoint - rgb.position;
-            xunluozhuan.y = transform.position.y;
+            xunluozhuan.y = 0;
             Quaternion xunluo;
             if (xunluozhuan != new Vector3(0, 0, 0))
-            { xunluo = Quaternion.LookRotation(xunluozhuan,Vector3.up); }
-            else xunluo = Quaternion.LookRotation(transform.forward,Vector3.up);
+            { xunluo = Quaternion.LookRotation(xunluozhuan); }
+            else xunluo = Quaternion.LookRotation(rgb.transform.forward);
             switch (ran)
             {
                 case 0:
@@ -84,5 +84,10 @@ public class EnemyAI : MonoBehaviour
             Destroy(gameObject);
             Debug.Log("敌人死亡");
         }
+    }
+    private void OnGUI()
+    {
+        Vector3 ddd = Camera.main.WorldToScreenPoint(transform.position);
+        GUI.DrawTexture(new Rect(ddd.x - 25, Screen.height - ddd.y - 50, LaoHu.HPChange /1.8f, 5), blood);
     }
 }
