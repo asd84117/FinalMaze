@@ -39,7 +39,7 @@ public class EnemyAI : MonoBehaviour
             rgb.MoveRotation(Quaternion.Slerp(rgb.rotation, dir, 10 * Time.deltaTime));
             if (distance >= 2)
             { rgb.MovePosition(rgb.position + transform.forward * Time.deltaTime * 4); }
-        }else if(distance>5)
+        }else if(distance>8)
         {
             if (Time.time - lastThinkTime > thinkTime)
             {

@@ -15,7 +15,7 @@ public class MoveAndRotation : MonoBehaviour {
         Quaternion dir;
         if (player.position!=PlayerPostion)
         { dir = Quaternion.LookRotation(PlayerPostion, Vector3.up); }
-        else dir = Quaternion.LookRotation(transform.forward, Vector3.up);
+        else dir = Quaternion.LookRotation(player.transform.forward, Vector3.up);
         player.MoveRotation( Quaternion.Slerp(player.rotation, dir, RotateSpeed * Time.deltaTime));
     }
     private void FixedUpdate()
