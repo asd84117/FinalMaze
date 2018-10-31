@@ -11,7 +11,7 @@ public class Click : UIBase {
 	// Use this for initialization
 	void Start () {
         AddButtonListen("Button_N", OnClick);
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
