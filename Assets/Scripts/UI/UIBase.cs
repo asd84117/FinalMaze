@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class UIBase : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class UIBase : MonoBehaviour
         }
         return null;
     }
+    //点击事件添加方法
     public void AddButtonListen(string controlName, UnityAction action)
     {
         UIBehaviour tmpBehaviour = GetBehaviour(controlName);
@@ -36,7 +38,16 @@ public class UIBase : MonoBehaviour
         {
             tmpBehaviour.AddButtonListen(action);
         }
-        
+    }
+    //拖拽事件添加方法
+    public void AddDrag(string controlName, UnityAction<BaseEventData> action)
+    {
+        Debug.Log("UIBase");
+        UIBehaviour tmpBehaviour = GetBehaviour(controlName);
+        if (tmpBehaviour != null)
+        {
+            tmpBehaviour.AddDrag(action);
+        }
     }
 
 }
