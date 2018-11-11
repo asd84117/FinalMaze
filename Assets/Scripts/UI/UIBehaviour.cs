@@ -24,7 +24,6 @@ public class UIBehaviour : MonoBehaviour
     //拖拽事件
     public void AddDrag(UnityAction<BaseEventData> action)
     {
-        Debug.Log("UIBehaviour");
         EventTrigger trigger = gameObject.GetComponent<EventTrigger>();
         if (trigger == null)
         {
@@ -34,6 +33,6 @@ public class UIBehaviour : MonoBehaviour
         entry.eventID = EventTriggerType.Drag;
         entry.callback = new EventTrigger.TriggerEvent();
         entry.callback.AddListener(action);
+        trigger.triggers.Add(entry);
     }
-
 }

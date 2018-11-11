@@ -23,8 +23,8 @@ public class UIBase : MonoBehaviour
     }
     public UIBehaviour GetBehaviour(string controlName)
     {
-        GameObject tmpObj= GetControl(controlName);
-        if (tmpObj!=null)
+        GameObject tmpObj = GetControl(controlName);
+        if (tmpObj != null)
         {
             return tmpObj.GetComponent<UIBehaviour>();
         }
@@ -34,7 +34,7 @@ public class UIBase : MonoBehaviour
     public void AddButtonListen(string controlName, UnityAction action)
     {
         UIBehaviour tmpBehaviour = GetBehaviour(controlName);
-        if (tmpBehaviour!=null)
+        if (tmpBehaviour != null)
         {
             tmpBehaviour.AddButtonListen(action);
         }
@@ -42,12 +42,10 @@ public class UIBase : MonoBehaviour
     //拖拽事件添加方法
     public void AddDrag(string controlName, UnityAction<BaseEventData> action)
     {
-        Debug.Log("UIBase");
         UIBehaviour tmpBehaviour = GetBehaviour(controlName);
         if (tmpBehaviour != null)
         {
             tmpBehaviour.AddDrag(action);
         }
     }
-
 }
