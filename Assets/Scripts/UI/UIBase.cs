@@ -48,4 +48,28 @@ public class UIBase : MonoBehaviour
             tmpBehaviour.AddDrag(action);
         }
     }
+    public void AddOnEndDrag(string controlName, UnityAction<BaseEventData> action)
+    {
+        UIBehaviour tmpBehaviour = GetBehaviour(controlName);
+        if (tmpBehaviour != null)
+        {
+            tmpBehaviour.AddOnEndDrag(action);
+        }
+    }
+    public void AddOnBeginDrag(string controlName, UnityAction<BaseEventData> action)
+    {
+        UIBehaviour tmpBehaviour = GetBehaviour(controlName);
+        if (tmpBehaviour != null)
+        {
+            tmpBehaviour.AddOnBeginDrag(action);
+        }
+    }
+    public void AddPointClick(string controlName, UnityAction<BaseEventData> action)
+    {
+        UIBehaviour tmpBehaviour = GetBehaviour(controlName);
+        if (tmpBehaviour != null)
+        {
+            tmpBehaviour.AddPointClick(action);
+        }
+    }
 }

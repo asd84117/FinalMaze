@@ -35,4 +35,43 @@ public class UIBehaviour : MonoBehaviour
         entry.callback.AddListener(action);
         trigger.triggers.Add(entry);
     }
+    public void AddOnBeginDrag(UnityAction<BaseEventData> action)
+    {
+        EventTrigger trigger = gameObject.GetComponent<EventTrigger>();
+        if (trigger == null)
+        {
+            trigger = gameObject.AddComponent<EventTrigger>();
+        }
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.BeginDrag;
+        entry.callback = new EventTrigger.TriggerEvent();
+        entry.callback.AddListener(action);
+        trigger.triggers.Add(entry);
+    }
+    public void AddOnEndDrag(UnityAction<BaseEventData> action)
+    {
+        EventTrigger trigger = gameObject.GetComponent<EventTrigger>();
+        if (trigger == null)
+        {
+            trigger = gameObject.AddComponent<EventTrigger>();
+        }
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.EndDrag;
+        entry.callback = new EventTrigger.TriggerEvent();
+        entry.callback.AddListener(action);
+        trigger.triggers.Add(entry);
+    }
+    public void AddPointClick(UnityAction<BaseEventData> action)
+    {
+        EventTrigger trigger = gameObject.GetComponent<EventTrigger>();
+        if (trigger == null)
+        {
+            trigger = gameObject.AddComponent<EventTrigger>();
+        }
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerClick;
+        entry.callback = new EventTrigger.TriggerEvent();
+        entry.callback.AddListener(action);
+        trigger.triggers.Add(entry);
+    }
 }
