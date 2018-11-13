@@ -12,7 +12,6 @@ public class LitMap : MonoBehaviour {
     GameObject player;
 	void Start ()
     {
-        
         player = GameObject.FindWithTag("Player");
         Map = transform.parent.GetComponent<RectTransform>();
 	}
