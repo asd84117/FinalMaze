@@ -20,7 +20,7 @@ public class Attack
         return false;
     }
     //扇形攻击 传入攻击者、被攻击者、攻击角度、攻击距离
-    public bool SectorAttack(Transform attacker,Transform attacked,float angle,float radius)
+    public bool SectorAttack(Transform attacker,Transform attacked,float radius, float angle)
     {
         Vector3 vector = attacked.position - attacker.position;
         float tmpAngle = Mathf.Acos(Vector3.Dot(vector.normalized, attacker.forward)) * Mathf.Rad2Deg;
