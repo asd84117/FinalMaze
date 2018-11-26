@@ -23,10 +23,6 @@ public class PlayerCtrl : MonoBehaviour
     {
         Idel,
         Walk,
-        Run,
-        Attack,
-        Attacked,
-
         Max
     }
     FSMManager fsmManager = new FSMManager((int)AnimationCount.Max);
