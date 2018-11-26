@@ -20,6 +20,7 @@ public class Easy
     //摇杆拖拽事件
     public void OnDrag(BaseEventData eventData)
     {
+        Data.EasyTouch = true;
         PointerEventData tmpDate = (PointerEventData)eventData;
         Vector2 tmpDistance = tmpDate.position - tmpCore;
         if (tmpDistance.magnitude < tmpRadius)
@@ -37,6 +38,7 @@ public class Easy
     //摇杆结束拖拽时归位
     public void OnEndDrag(BaseEventData eventData)
     {
+        Data.EasyTouch = false;
         tmpRocker.transform.position = tmpCore;
     }
 }

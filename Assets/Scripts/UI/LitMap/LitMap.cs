@@ -8,17 +8,16 @@ public class LitMap : MonoBehaviour {
     float posX;
     float posY;
     RectTransform Map;
-    public Terrain plan;
-    GameObject player;
+    Terrain plan;
 	void Start ()
     {
-        player = GameObject.FindWithTag("Player");
+        plan = GameObject.FindGameObjectWithTag("Plane").GetComponent<Terrain>();
         Map = transform.parent.GetComponent<RectTransform>();
 	}
 	
 	void Update ()
     {
-        pos = player.transform.position - plan.transform.position;
+        pos = AIManager.Instance.Player.position - plan.transform.position;
         posX = pos.x / plan.terrainData.size.x;
         posY = pos.z / plan.terrainData.size.z;
         litMap.x = posX * Map.sizeDelta.x;
