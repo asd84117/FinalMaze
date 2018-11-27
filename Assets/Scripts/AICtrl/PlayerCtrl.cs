@@ -3,59 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PlayerIdel:FSMBase
-{
-    Animator animator;
-    public PlayerIdel(Animator tmpAnimator)
-    {
-        animator = tmpAnimator;
-    }
-    public override void OnEnter()
-    {
-        //改参数作动画
-        animator.SetInteger("Index", 0);
-    }
-}
-public class PlayerWalk : FSMBase
-{
-    Animator animator;
-    public PlayerWalk(Animator tmpAnimator)
-    {
-        animator = tmpAnimator;
-    }
-    public override void OnEnter()
-    {
-        //改参数作动画
-        animator.SetInteger("Index", 1);
-    }
-}
-public class PlayerRun : FSMBase
-{
-    Animator animator;
-    public PlayerRun(Animator tmpAnimator)
-    {
-        animator = tmpAnimator;
-    }
-    public override void OnEnter()
-    {
-        //改参数作动画
-        animator.SetInteger("Index",2);
-    }
-}
-public class PlayerAttack : FSMBase
-{
-    Animator animator;
-    public PlayerAttack(Animator tmpAnimator)
-    {
-        animator = tmpAnimator;
-    }
-    public override void OnEnter()
-    {
-        //改参数作动画
-        animator.SetInteger("Index", 3);
-    }
-}
-
 
 
 public class PlayerCtrl :AIBase
@@ -71,8 +18,8 @@ public class PlayerCtrl :AIBase
     {
         base.Initial();
         Animator animator;
-
         animator = GetComponent<Animator>();
+
         PlayerIdel playerIdel = new PlayerIdel(animator);
         fsmManager.AddState(playerIdel);
         PlayerWalk playerWalk = new PlayerWalk(animator);
