@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIManager : MonoBehaviour
+public class EnemyManager : MonoBehaviour
 {
-    public static AIManager Instance;
-
+    public static EnemyManager instance;
     PlayerData playerData;
     Attack attack;
 
-    Transform player=null;
+    Transform player =null;
     public Transform Player
     {
         get
@@ -48,7 +47,13 @@ public class AIManager : MonoBehaviour
         Object tmpObj = Resources.Load(path);
         GameObject tmpEnemy = GameObject.Instantiate(tmpObj) as GameObject;
         tmpEnemy.transform.SetParent(parent);
-        EnemyAI tmpEnemyAI= tmpEnemy.AddComponent<EnemyAI>();
+        tmpEnemy.AddComponent<EnemyAI>();
+        tmpEnemy.AddComponent<EnemyBase>();
+
+        tmpEnemy.transform.position = parent.position;
+
+        EnemyAI tmpEnemyAI = tmpEnemy.GetComponent<EnemyAI>();
+
         allEnemy.Add(tmpEnemyAI);
         return tmpEnemy;
     }
@@ -58,18 +63,24 @@ public class AIManager : MonoBehaviour
     {
         for (int i = 0; i < allEnemy.Count; i++)
         {
+
+
             EnemyAI tmpEnemy = allEnemy[i].GetComponent<EnemyAI>();
             tmpEnemy.EnemyAttack();
             //加个巡逻
         }
     }
-
+    Transform enemyTransform;
     private void Awake()
     {
-        Instance = this;
+
         attack = new Attack();
         playerData = new PlayerData();
         allEnemy = new List<EnemyAI>();
+
+        enemyTransform = GameObject.FindGameObjectWithTag("Enemy").transform;
+        BuildEnemy("Model/Player/SapphiArtchan", enemyTransform);
+
     }
 
     private void Update()

@@ -21,7 +21,7 @@ public class PlayerData
     }
     #endregion
     #region 移动速度
-    float moveSpeed = 50;
+    float moveSpeed = 100;
     public float MoveSpeed
     {
         get { return moveSpeed; }

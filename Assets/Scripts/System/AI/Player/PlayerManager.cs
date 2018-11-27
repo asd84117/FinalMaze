@@ -5,6 +5,11 @@ using UnityEngine;
 public class PlayerManager :MonoBehaviour
 {
     public static PlayerManager Instance;
+
+    public PlayerCtrl PlayerCtrl
+    {
+        get { return tmpPlayer.GetComponent<PlayerCtrl>(); }
+    }
     GameObject tmpPlayer;
     public Transform Player
     {

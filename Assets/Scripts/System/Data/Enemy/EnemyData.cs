@@ -21,7 +21,7 @@ public class EnemyData
     }
     #endregion
     #region 移动速度
-    float moveSpeed = 3;
+    float moveSpeed = 80;
     public float MoveSpeed
     {
         get { return moveSpeed; }
@@ -61,7 +61,7 @@ public class EnemyData
     }
     #endregion
     #region 跟随距离
-    float followDistance = 10;
+    float followDistance = 5;
     public float FollowDistance
     {
         get { return followDistance; }
@@ -69,7 +69,7 @@ public class EnemyData
     }
     #endregion
     #region 施放攻击动作的距离
-    float attackDistance = 5;
+    float attackDistance = 1;
     public float AttackDistance
     {
         get { return attackDistance; }

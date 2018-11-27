@@ -10,6 +10,17 @@ public class PlayerCtrl :AIBase
     PlayerData playerData;
     FSMManager fsmManager = new FSMManager((int)Data.AnimationCount.Max);
 
+    public override void ChangeState(sbyte state)
+    {
+        fsmManager.ChangeState(state);
+    }
+
+    public void AttackOne()
+    {
+        ChangeState((sbyte)Data.AnimationCount.Attack);
+        
+    }
+
     private void Awake()
     {
         playerData = new PlayerData();
@@ -34,11 +45,8 @@ public class PlayerCtrl :AIBase
         fsmManager.Stay();
         if(Data.EasyTouch)
         {
-            fsmManager.ChangeState((sbyte)Data.AnimationCount.Run);
+            ChangeState((sbyte)Data.AnimationCount.Run);
             SimpleMove(transform.forward * Time.deltaTime * playerData.MoveSpeed);
-        }else
-        {
-            fsmManager.ChangeState((sbyte)Data.AnimationCount.Idel);
         }
     }
 }

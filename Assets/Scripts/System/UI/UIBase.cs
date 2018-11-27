@@ -70,6 +70,7 @@ public class UIBase : MonoBehaviour
         if (tmpBehaviour != null)
         {
             tmpBehaviour.AddPointClick(action);
+            
         }
     }
 }

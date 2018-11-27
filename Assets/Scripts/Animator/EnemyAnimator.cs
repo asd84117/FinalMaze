@@ -1,80 +1,69 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class PlayerIdel : FSMBase
+public class EnemyIdel : FSMBase
 {
     Animator animator;
-
-    public PlayerIdel(Animator tmpAnimator)
+    public EnemyIdel(Animator tmpAnimator)
     {
         animator = tmpAnimator;
     }
+
     public override void OnEnter()
     {
-        //改参数作动画
         animator.SetInteger("Index", 0);
     }
- 
 }
-public class PlayerWalk : FSMBase
+public class EnemyWalk : FSMBase
 {
     Animator animator;
-    public PlayerWalk(Animator tmpAnimator)
+    public EnemyWalk(Animator tmpAnimator)
     {
         animator = tmpAnimator;
     }
+
     public override void OnEnter()
     {
-        //改参数作动画
         animator.SetInteger("Index", 1);
     }
 }
-public class PlayerRun : FSMBase
+public class EnemyRun : FSMBase
 {
     Animator animator;
-
-    public PlayerRun(Animator tmpAnimator)
+    public EnemyRun(Animator tmpAnimator)
     {
         animator = tmpAnimator;
     }
+
     public override void OnEnter()
     {
-        //改参数作动画
         animator.SetInteger("Index", 2);
     }
-    public override void OnStay()
-    {
-        if(!Data.EasyTouch)
-        {
-            PlayerManager.Instance.PlayerCtrl.ChangeState((sbyte)Data.AnimationCount.Idel);
-        }
-    }
 }
-public class PlayerAttack : FSMBase
+public class EnemyAttack : FSMBase
 {
     Animator animator;
-    public PlayerAttack(Animator tmpAnimator)
+    public EnemyAttack(Animator tmpAnimator)
     {
         animator = tmpAnimator;
     }
+
+    float timeCount;
     public override void OnEnter()
     {
-        //改参数作动画
         animator.SetInteger("Index", 3);
     }
-    float timeCount;
     public override void OnStay()
     {
-        
         timeCount += Time.deltaTime;
-        if(timeCount>0.8f)
+        if (timeCount > 0.8f)
         {
-            PlayerManager.Instance.PlayerCtrl.ChangeState((sbyte)Data.AnimationCount.Idel);
+            animator.SetInteger("Index", 0);
             timeCount = 0;
+        }else
+        {
+            animator.SetInteger("Index", 3);
         }
     }
 }
-
-

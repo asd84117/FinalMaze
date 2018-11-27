@@ -9,9 +9,11 @@ public class Main : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("PlayerParent");
         player.AddComponent<PlayerManager>();
+        
+
         Camera.main.gameObject.AddComponent<CameraManager>();
         gameObject.AddComponent<UIManager>();
-        gameObject.AddComponent<AIManager>();
+        gameObject.AddComponent<EnemyManager>();
         DontDestroyOnLoad(gameObject);
     }
 }

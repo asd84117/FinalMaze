@@ -10,7 +10,7 @@ public class CameraManager : MonoBehaviour
         target = PlayerManager.Instance.Player;
     }
     Vector3 vector = Vector3.one;
-    public Vector3 distance = new Vector3(0, 1.73f, -3.32f);
+    public Vector3 distance = new Vector3(0, 1.5f, -3.32f);
     float fllowSpeed = 0.25f;
     float timeCount;
     private void LateUpdate()

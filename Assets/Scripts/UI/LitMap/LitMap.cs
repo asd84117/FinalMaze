@@ -17,7 +17,7 @@ public class LitMap : MonoBehaviour {
 	
 	void Update ()
     {
-        pos = AIManager.Instance.Player.position - plan.transform.position;
+        pos = PlayerManager.Instance.Player.position - plan.transform.position;
         posX = pos.x / plan.terrainData.size.x;
         posY = pos.z / plan.terrainData.size.z;
         litMap.x = posX * Map.sizeDelta.x;
