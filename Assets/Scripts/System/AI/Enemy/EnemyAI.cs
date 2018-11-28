@@ -5,12 +5,12 @@ using UnityEngine;
 public class EnemyAI : AIBase
 {
     EnemyData data;
-    Attack attack;
+    //Attack attack;
     public override void Initial()
     {
         base.Initial();
         data = new EnemyData();
-        attack = new Attack();
+        //attack = new Attack();
     }
     //掉血，传入掉的血量
     public void ReduceBlood(float reduce)
