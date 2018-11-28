@@ -44,9 +44,11 @@ public class EnemyRun : FSMBase
 public class EnemyAttack : FSMBase
 {
     Animator animator;
-    public EnemyAttack(Animator tmpAnimator)
+    EnemyAI enemy;
+    public EnemyAttack(Animator tmpAnimator,EnemyAI tmpEnemy)
     {
         animator = tmpAnimator;
+        enemy = tmpEnemy;
     }
 
     float timeCount;
@@ -59,7 +61,7 @@ public class EnemyAttack : FSMBase
         timeCount += Time.deltaTime;
         if (timeCount > 0.48f)
         {
-            animator.SetInteger("Index", 0);
+            enemy.ChangeState((sbyte)Data.AnimationCount.Idel);
             timeCount = 0;
         }else
         {

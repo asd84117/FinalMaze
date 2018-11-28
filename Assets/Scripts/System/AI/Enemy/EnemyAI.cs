@@ -27,18 +27,19 @@ public class EnemyAI : AIBase
         {
             if (distance.magnitude <= data.AttackDistance) 
             {
-                transform.LookAt(PlayerManager.Instance.Player);
-
                 fsmManager.ChangeState((sbyte)Data.AnimationCount.Attack);
-                attack.SectorAttack(transform, PlayerManager.Instance.Player, data.Radius, data.Angle);
+                //attack.SectorAttack(transform, PlayerManager.Instance.Player, data.Radius, data.Angle);
                 
             }
             else
             {
                 transform.LookAt(PlayerManager.Instance.Player);
                 fsmManager.ChangeState((sbyte)Data.AnimationCount.Run);
-                SimpleMove(transform.forward* data.MoveSpeed*Time.deltaTime);
+                SimpleMove(distance.normalized* data.MoveSpeed*Time.deltaTime);
             }
+        }else
+        {
+            fsmManager.ChangeState((sbyte)Data.AnimationCount.Idel);
         }
     }
 
@@ -62,7 +63,7 @@ public class EnemyAI : AIBase
         fsmManager.AddState(enemyWalk);
         EnemyRun enemyRun = new EnemyRun(animator);
         fsmManager.AddState(enemyRun);
-        EnemyAttack enemyAttack = new EnemyAttack(animator);
+        EnemyAttack enemyAttack = new EnemyAttack(animator,this);
         fsmManager.AddState(enemyAttack);
     }
     private void Update()
