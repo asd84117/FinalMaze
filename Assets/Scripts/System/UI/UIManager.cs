@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
         }
         allChild[panelName].Add(controlName, obj);
     }
+    //得到UI控件的gameobject
     public GameObject GetChild(string panelName,string controlNmae)
     {
         if (allChild.ContainsKey(panelName))
@@ -26,5 +27,10 @@ public class UIManager : MonoBehaviour
             return allChild[panelName][controlNmae];
         }
         return null;
+    }
+    //得到Panel
+    public GameObject GetPanel(string panelName)
+    {
+        return allChild[panelName][panelName];
     }
 }

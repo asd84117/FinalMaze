@@ -11,8 +11,20 @@ public class UIBehaviour : MonoBehaviour
     {
         UIBase tmpBase = transform.GetComponentInParent<UIBase>();
         UIManager.Instance.RegistControl(tmpBase.name, transform.name, gameObject);
+    }    
+
+    //获取Slider组件
+    public Slider GetSliderListen()
+    {
+        Slider tmpBtn = transform.GetComponent<Slider>();
+        if (tmpBtn != null)
+        {
+            return tmpBtn;
+        }
+        return null;
     }
-    //点击事件
+
+    //给Button添加点击事件
     public void AddButtonListen(UnityAction action)
     {
         Button tmpBtn = transform.GetComponent<Button>();
@@ -21,7 +33,8 @@ public class UIBehaviour : MonoBehaviour
             tmpBtn.onClick.AddListener(action);
         }
     }
-    //拖拽事件
+
+    //添加拖拽事件
     public void AddDrag(UnityAction<BaseEventData> action)
     {
         EventTrigger trigger = gameObject.GetComponent<EventTrigger>();
@@ -35,6 +48,7 @@ public class UIBehaviour : MonoBehaviour
         entry.callback.AddListener(action);
         trigger.triggers.Add(entry);
     }
+    //添加开始拖拽事件
     public void AddOnBeginDrag(UnityAction<BaseEventData> action)
     {
         EventTrigger trigger = gameObject.GetComponent<EventTrigger>();
@@ -48,6 +62,7 @@ public class UIBehaviour : MonoBehaviour
         entry.callback.AddListener(action);
         trigger.triggers.Add(entry);
     }
+    //添加结束拖拽事件
     public void AddOnEndDrag(UnityAction<BaseEventData> action)
     {
         EventTrigger trigger = gameObject.GetComponent<EventTrigger>();
@@ -61,6 +76,7 @@ public class UIBehaviour : MonoBehaviour
         entry.callback.AddListener(action);
         trigger.triggers.Add(entry);
     }
+    //添加点击事件
     public void AddPointClick(UnityAction<BaseEventData> action)
     {
         EventTrigger trigger = gameObject.GetComponent<EventTrigger>();

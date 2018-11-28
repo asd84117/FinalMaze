@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
@@ -30,7 +31,7 @@ public class UIBase : MonoBehaviour
         }
         return null;
     }
-    //点击事件添加方法
+    //添加Button的事件
     public void AddButtonListen(string controlName, UnityAction action)
     {
         UIBehaviour tmpBehaviour = GetBehaviour(controlName);
@@ -48,6 +49,7 @@ public class UIBase : MonoBehaviour
             tmpBehaviour.AddDrag(action);
         }
     }
+    //结束拖拽事件添加方法
     public void AddOnEndDrag(string controlName, UnityAction<BaseEventData> action)
     {
         UIBehaviour tmpBehaviour = GetBehaviour(controlName);
@@ -56,6 +58,7 @@ public class UIBase : MonoBehaviour
             tmpBehaviour.AddOnEndDrag(action);
         }
     }
+    //开始拖拽事件添加方法
     public void AddOnBeginDrag(string controlName, UnityAction<BaseEventData> action)
     {
         UIBehaviour tmpBehaviour = GetBehaviour(controlName);
@@ -64,6 +67,7 @@ public class UIBase : MonoBehaviour
             tmpBehaviour.AddOnBeginDrag(action);
         }
     }
+    //点击事件添加方法
     public void AddPointClick(string controlName, UnityAction<BaseEventData> action)
     {
         UIBehaviour tmpBehaviour = GetBehaviour(controlName);
@@ -72,5 +76,15 @@ public class UIBase : MonoBehaviour
             tmpBehaviour.AddPointClick(action);
             
         }
+    }
+    //获取Slider组件
+    public Slider GetSliderListen(string controlName)
+    {
+        UIBehaviour tmpBehaviour = GetBehaviour(controlName);
+        if (tmpBehaviour != null)
+        {
+            return tmpBehaviour.GetSliderListen();
+        }
+        return null;
     }
 }
