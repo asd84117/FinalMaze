@@ -57,7 +57,7 @@ public class EnemyAttack : FSMBase
     public override void OnStay()
     {
         timeCount += Time.deltaTime;
-        if (timeCount > 0.8f)
+        if (timeCount > 0.48f)
         {
             animator.SetInteger("Index", 0);
             timeCount = 0;

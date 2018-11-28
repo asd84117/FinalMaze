@@ -69,7 +69,7 @@ public class PlayerAttack : FSMBase
     {
         
         timeCount += Time.deltaTime;
-        if(timeCount>0.8f)
+        if(timeCount>0.24f)
         {
             PlayerManager.Instance.PlayerCtrl.ChangeState((sbyte)Data.AnimationCount.Idel);
             timeCount = 0;

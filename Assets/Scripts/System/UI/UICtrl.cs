@@ -9,13 +9,22 @@ public class UICtrl : UIBase
     {
         PlayerManager.Instance.PlayerCtrl.AttackOne();
     }
+    public void EasyTouchInitial(string path)
+    {
+        GameObject tmpEasyTouch = GetControl(path);
+        Easy easyTouch = new Easy(tmpEasyTouch.transform.position, tmpEasyTouch, 75, PlayerManager.Instance.Player.gameObject);
+        AddDrag(path, easyTouch.OnDrag);
+        AddOnEndDrag(path, easyTouch.OnEndDrag);
+
+    }
+    public void PlayerAttackInitial()
+    {
+        AddPointClick("Attack_N", OnClick);
+    }
 
     void Start ()
     {
-        GameObject tmpEasyTouch = GetControl("Image_N");
-        Easy easyTouch = new Easy(tmpEasyTouch.transform.position,tmpEasyTouch,75,PlayerManager.Instance.Player.gameObject);
-        AddDrag("Image_N", easyTouch.OnDrag);
-        AddOnEndDrag("Image_N", easyTouch.OnEndDrag);
-        AddPointClick("Attack_N", OnClick);
+        EasyTouchInitial("Image_N");
+        PlayerAttackInitial();
     }
 }
