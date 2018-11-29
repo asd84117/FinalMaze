@@ -21,17 +21,27 @@ public class UICtrl : UIBase
     public void PlayerAttackInitial()
     {
         AddPointClick("Attack_N", OnClick);
+        AddPointClick("Play_N", PlayAudio);
+        AddPointClick("Stop_N", StopAudio);
     }
     public void OnClick(BaseEventData tmpBase)
     {
         PlayerManager.Instance.PlayerCtrl.ChangeState((sbyte)Data.AnimationCount.Attack);
     }
     #endregion
+    public void PlayAudio(BaseEventData data)
+    {
+        AudioManager.Instance.StartAudio("A");
+    }
+    public void StopAudio(BaseEventData data)
+    {
+        AudioManager.Instance.StopAudio("A");
+    }
 
     public void ReduceBlood(float reduce)
     {
         Slider blood = GetSliderListen("Blood_N");
-        blood.value -= reduce / 100;
+        blood.value -= reduce / 100f;
     }
 
     void Start ()

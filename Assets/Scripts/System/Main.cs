@@ -14,6 +14,7 @@ public class Main : MonoBehaviour
         Camera.main.gameObject.AddComponent<CameraManager>();
         gameObject.AddComponent<UIManager>();
         gameObject.AddComponent<EnemyManager>();
+        gameObject.AddComponent<AudioManager>();
         DontDestroyOnLoad(gameObject);
     }
 }

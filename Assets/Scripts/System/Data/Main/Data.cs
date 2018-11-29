@@ -17,4 +17,9 @@ public class Data
 
     }
 
+    public enum Audio
+    {
+        A
+    }
+
 }
