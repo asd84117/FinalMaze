@@ -12,6 +12,7 @@ public class Data
         Run,
         Attack,
         Attacked,
+        Die,
 
         Max
 

@@ -29,6 +29,15 @@ public class UICtrl : UIBase
         PlayerManager.Instance.PlayerCtrl.ChangeState((sbyte)Data.AnimationCount.Attack);
     }
     #endregion
+    #region 血条绑定UI
+    public void ReduceBlood(float reduce)
+    {
+        Slider blood = GetSliderListen("Blood_N");
+        blood.value -= reduce ;
+    }
+    #endregion
+
+
     public void PlayAudio(BaseEventData data)
     {
         AudioManager.Instance.StartAudio("A");
@@ -36,12 +45,6 @@ public class UICtrl : UIBase
     public void StopAudio(BaseEventData data)
     {
         AudioManager.Instance.StopAudio("A");
-    }
-
-    public void ReduceBlood(float reduce)
-    {
-        Slider blood = GetSliderListen("Blood_N");
-        blood.value -= reduce / 100f;
     }
 
     void Start ()

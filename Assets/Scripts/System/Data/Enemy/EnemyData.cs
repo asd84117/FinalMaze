@@ -20,6 +20,24 @@ public class EnemyData
         set { hurt = value; }
     }
     #endregion
+    #region 怪物上次攻击时间
+    float lastAttackTime=0f;
+    public float LastAttackTime
+    {
+        get { return lastAttackTime; }
+        set { lastAttackTime = value; }
+    }
+    #endregion
+    #region 怪物攻击间隔
+    float attackCD = 0.72f;
+    public float AttackCD
+    {
+        get { return attackCD; }
+        set { attackCD = value; }
+    }
+    #endregion
+
+
     #region 移动速度
     float moveSpeed = 80;
     public float MoveSpeed

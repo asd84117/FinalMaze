@@ -7,15 +7,14 @@ using UnityEngine;
 
 public class PlayerCtrl :AIBase
 {
-    PlayerData playerData;
     FSMManager fsmManager = new FSMManager((int)Data.AnimationCount.Max);
 
     public void ReduceBlood(float reduce)
     {
-        playerData.Blood -= reduce;
+        PlayerData.blood -= reduce;
         GameObject tmpObj = UIManager.Instance.GetPanel("GameInterface_N");
         UICtrl tmpCtrl = tmpObj.GetComponent<UICtrl>();
-        tmpCtrl.ReduceBlood(reduce);
+        tmpCtrl.ReduceBlood(reduce/100f);
     }
 
     //改变动画状态
@@ -26,7 +25,6 @@ public class PlayerCtrl :AIBase
 
     private void Awake()
     {
-        playerData = new PlayerData();
     }
     private void Start()
     {
@@ -42,14 +40,42 @@ public class PlayerCtrl :AIBase
         fsmManager.AddState(playerRun);
         PlayerAttack playerAttack = new PlayerAttack(animator);
         fsmManager.AddState(playerAttack);
+        PlayerAttacked playerAttacked = new PlayerAttacked(animator,this);
+        fsmManager.AddState(playerAttacked);
+        PlayerDie playerDie = new PlayerDie(animator);
+        fsmManager.AddState(playerDie);
+
     }
+    float timeCount=0;
+
     private void Update()
     {
         fsmManager.Stay();
-        if(Data.EasyTouch)
+        #region 播放玩家死亡动画
+        if (PlayerData.blood==0)
+        {
+            ChangeState((sbyte)Data.AnimationCount.Die);
+        }
+        #endregion
+        #region 播放玩家受攻击动画
+        if (PlayerData.playerAttacked)
+        {
+            timeCount += Time.deltaTime;
+            if (timeCount>0.06f)
+            {
+                timeCount = 0;
+                PlayerData.playerAttacked = false;
+                ChangeState((sbyte)Data.AnimationCount.Attacked);
+
+            }
+        }
+        #endregion
+        #region 播放玩家移动动画
+        if (Data.EasyTouch)
         {
             ChangeState((sbyte)Data.AnimationCount.Run);
-            SimpleMove(transform.forward * Time.deltaTime * playerData.MoveSpeed);
+            SimpleMove(transform.forward * Time.deltaTime * PlayerData.moveSpeed);
         }
+        #endregion
     }
 }

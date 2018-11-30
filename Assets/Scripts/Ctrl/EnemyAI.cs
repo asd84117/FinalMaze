@@ -4,42 +4,55 @@ using UnityEngine;
 
 public class EnemyAI : AIBase
 {
-    EnemyData data;
-    Attack attack;
+    public EnemyData enemyData;
+    public Attack attack;
 
     public override void Initial()
     {
         base.Initial();
-        data = new EnemyData();
+        enemyData = new EnemyData();
         //attack = new Attack();
     }
     //掉血，传入掉的血量
     public void ReduceBlood(float reduce)
     {
-        data.Blood -= reduce;
+        enemyData.Blood -= reduce;
     }
+    public float timeCount = 0;
+
     //怪物攻击和跟随检测
     public void EnemyAttack()
     {
-        Vector3 distance = PlayerManager.Instance.Player.position - transform.position;
 
+
+        Vector3 distance = PlayerManager.Instance.Player.position - transform.position;
         //检测距离
-        if(distance.magnitude<data.FollowDistance)
+        if(distance.magnitude< enemyData.FollowDistance&&PlayerData.blood!=0)
         {
-            if (distance.magnitude <= data.AttackDistance) 
+            if (distance.magnitude <= enemyData.AttackDistance)
             {
-                fsmManager.ChangeState((sbyte)Data.AnimationCount.Attack);
-                bool hit = attack.SquareAttack(transform, PlayerManager.Instance.Player, data.ForwordDistance, data.RightDistance);
-                if (hit)
+                timeCount += Time.deltaTime;
+
+                if (Time.time - enemyData.LastAttackTime > enemyData.AttackCD)
                 {
-                    PlayerManager.Instance.PlayerCtrl.ReduceBlood(data.Hurt);
+
+                    enemyData.LastAttackTime = Time.time;
+                    fsmManager.ChangeState((sbyte)Data.AnimationCount.Attack);
+                    if (attack.SquareAttack(transform, PlayerManager.Instance.Player, enemyData.ForwordDistance, enemyData.RightDistance))
+                    {
+                        PlayerManager.Instance.PlayerCtrl.ReduceBlood(enemyData.Hurt);
+                        PlayerData.playerAttacked = true;
+                    }
+
                 }
+                else
+                    fsmManager.ChangeState((sbyte)Data.AnimationCount.Idel);
             }
             else
             {
                 transform.LookAt(PlayerManager.Instance.Player);
                 fsmManager.ChangeState((sbyte)Data.AnimationCount.Run);
-                SimpleMove(distance.normalized* data.MoveSpeed*Time.deltaTime);
+                SimpleMove(distance.normalized* enemyData.MoveSpeed*Time.deltaTime);
             }
         }else
         {
@@ -68,7 +81,7 @@ public class EnemyAI : AIBase
         fsmManager.AddState(enemyWalk);
         EnemyRun enemyRun = new EnemyRun(animator);
         fsmManager.AddState(enemyRun);
-        EnemyAttack enemyAttack = new EnemyAttack(animator,this);
+        EnemyAttack enemyAttack = new EnemyAttack(animator);
         fsmManager.AddState(enemyAttack);
     }
     private void Update()
