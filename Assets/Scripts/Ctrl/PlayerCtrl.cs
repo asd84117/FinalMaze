@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class PlayerCtrl :AIBase
 {
@@ -8,8 +10,8 @@ public class PlayerCtrl :AIBase
     public void ReduceBlood(float reduce)
     {
         PlayerData.blood -= reduce;
-
-        GameUICtrl.ReduceBlood(reduce/100f);
+        UIManager.Instance.GetChild("GameCanvas", "Blood_N").GetComponent<Slider>().value = PlayerData.blood/PlayerData.bloodMax;
+        //GameUICtrl.ReduceBlood(reduce/100f);
     }
 
     //改变动画状态

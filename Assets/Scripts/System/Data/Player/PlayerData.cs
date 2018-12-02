@@ -9,6 +9,7 @@ public class PlayerData
     #endregion
 
     #region 玩家血量
+    public static float bloodMax = 100;
     public static float blood = 100;
     #endregion
     #region 玩家攻击伤害

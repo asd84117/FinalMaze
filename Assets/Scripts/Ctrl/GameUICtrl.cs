@@ -28,13 +28,6 @@ public class GameUICtrl : UIBase
         PlayerManager.Instance.PlayerCtrl.ChangeState((sbyte)Data.AnimationCount.Attack);
     }
     #endregion
-    #region 血条绑定UI
-    public static void ReduceBlood(float reduce)
-    {
-        blood.value -= reduce ;
-    }
-    #endregion
-
 
     public void PlayAudio(BaseEventData data)
     {
@@ -63,15 +56,8 @@ public class GameUICtrl : UIBase
     #endregion
 
     GameObject litMap;
-    GameObject tmpBlood;
-    static Slider blood;
     void Start ()
     {
-
-        #region 血条的加载，必须放在第一句，本脚本不能加Awake
-        tmpBlood = GetControl("Blood_N");
-        blood = tmpBlood.GetComponent<Slider>();
-        #endregion
 
         #region 小地图相关事件的加载
         litMap = GetControl("LitMapInterface_N");
