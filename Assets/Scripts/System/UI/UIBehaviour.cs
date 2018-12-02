@@ -13,16 +13,6 @@ public class UIBehaviour : MonoBehaviour
         UIManager.Instance.RegistControl(tmpBase.name, transform.name, gameObject);
     }    
 
-    //获取Slider组件
-    public Slider GetSliderListen()
-    {
-        Slider tmpBtn = transform.GetComponent<Slider>();
-        if (tmpBtn != null)
-        {
-            return tmpBtn;
-        }
-        return null;
-    }
 
     //给Button添加点击事件
     public void AddButtonListen(UnityAction action)

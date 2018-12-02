@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class UICtrl : UIBase
+public class GameUICtrl : UIBase
 {
-
     #region EasyTouch功能的加载
     public void EasyTouchInitial(string path)
     {
@@ -30,9 +29,8 @@ public class UICtrl : UIBase
     }
     #endregion
     #region 血条绑定UI
-    public void ReduceBlood(float reduce)
+    public static void ReduceBlood(float reduce)
     {
-        Slider blood = GetSliderListen("Blood_N");
         blood.value -= reduce ;
     }
     #endregion
@@ -47,9 +45,47 @@ public class UICtrl : UIBase
         AudioManager.Instance.StopAudio("A");
     }
 
+    #region 小地图开关事件
+    public void CloseLitMap(BaseEventData data)
+    {
+        litMap.SetActive(false);
+    }
+    public void OpenLitMap(BaseEventData data)
+    {
+        litMap.SetActive(true);
+    }
+    public void LitMapListen(string openKey,string closeName)
+    {
+        AddPointClick(openKey, OpenLitMap);
+
+        AddPointClick(closeName, CloseLitMap);
+    }
+    #endregion
+
+    GameObject litMap;
+    GameObject tmpBlood;
+    static Slider blood;
     void Start ()
     {
+
+        #region 血条的加载，必须放在第一句，本脚本不能加Awake
+        tmpBlood = GetControl("Blood_N");
+        blood = tmpBlood.GetComponent<Slider>();
+        #endregion
+
+        #region 小地图相关事件的加载
+        litMap = GetControl("LitMapInterface_N");
+        LitMapListen("LitMap_N", "LitMapInterface_N");
+        litMap.SetActive(false);
+        #endregion
+
+        #region 摇杆的加载
         EasyTouchInitial("Image_N");
+        #endregion
+
+        #region 攻击技能的加载
         PlayerAttackInitial();
+        #endregion
     }
+
 }

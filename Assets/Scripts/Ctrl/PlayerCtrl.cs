@@ -2,19 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
-
 public class PlayerCtrl :AIBase
 {
     FSMManager fsmManager = new FSMManager((int)Data.AnimationCount.Max);
-
     public void ReduceBlood(float reduce)
     {
         PlayerData.blood -= reduce;
-        GameObject tmpObj = UIManager.Instance.GetPanel("GameInterface_N");
-        UICtrl tmpCtrl = tmpObj.GetComponent<UICtrl>();
-        tmpCtrl.ReduceBlood(reduce/100f);
+
+        GameUICtrl.ReduceBlood(reduce/100f);
     }
 
     //改变动画状态

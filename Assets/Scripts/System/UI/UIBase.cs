@@ -12,6 +12,7 @@ public class UIBase : MonoBehaviour
         Transform[] tmpChild = transform.GetComponentsInChildren<Transform>();
         for (int i = 0; i < tmpChild.Length; i++)
         {
+
             if (tmpChild[i].name.EndsWith("_N"))
             {
                 tmpChild[i].gameObject.AddComponent<UIBehaviour>();
@@ -70,21 +71,13 @@ public class UIBase : MonoBehaviour
     //点击事件添加方法
     public void AddPointClick(string controlName, UnityAction<BaseEventData> action)
     {
+
         UIBehaviour tmpBehaviour = GetBehaviour(controlName);
+
         if (tmpBehaviour != null)
         {
             tmpBehaviour.AddPointClick(action);
             
         }
-    }
-    //获取Slider组件
-    public Slider GetSliderListen(string controlName)
-    {
-        UIBehaviour tmpBehaviour = GetBehaviour(controlName);
-        if (tmpBehaviour != null)
-        {
-            return tmpBehaviour.GetSliderListen();
-        }
-        return null;
     }
 }

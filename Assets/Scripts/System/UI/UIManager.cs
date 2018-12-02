@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     //得到UI控件的gameobject
     public GameObject GetChild(string panelName,string controlNmae)
     {
+
         if (allChild.ContainsKey(panelName))
         {
             return allChild[panelName][controlNmae];
