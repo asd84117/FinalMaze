@@ -19,7 +19,7 @@ public class EnemyManager : MonoBehaviour
             return player;
         }
     }
-    List<EnemyAI> allEnemy;
+    public static List<EnemyAI> allEnemy;
 
     //检测被攻击
     public void AttackedByPlayer()
@@ -69,15 +69,16 @@ public class EnemyManager : MonoBehaviour
             //加个巡逻
         }
     }
-    Transform enemyTransform;
     private void Awake()
     {
 
         attack = new Attack();
         allEnemy = new List<EnemyAI>();
 
-        enemyTransform = GameObject.FindGameObjectWithTag("Enemy").transform;
+        Transform enemyTransform = GameObject.Find("Enemy").transform;
         BuildEnemy("Model/Player/SapphiArtchan", enemyTransform);
+        Transform enemy2Transform = GameObject.Find("Enemy2").transform;
+        BuildEnemy("Model/Player/SapphiArtchan", enemy2Transform);
 
     }
 

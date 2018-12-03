@@ -20,7 +20,7 @@ public class EnemyAI : AIBase
     }
     public float timeCount = 0;
 
-    //怪物攻击和跟随检测
+    #region 怪物攻击和跟随检测
     public void EnemyAttack()
     {
 
@@ -59,6 +59,8 @@ public class EnemyAI : AIBase
             fsmManager.ChangeState((sbyte)Data.AnimationCount.Idel);
         }
     }
+    #endregion
+
 
     FSMManager fsmManager;
     Animator animator;

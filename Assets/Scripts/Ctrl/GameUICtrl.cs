@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using LitJson;
+using System.IO;
 
 public class GameUICtrl : UIBase
 {
@@ -55,7 +56,56 @@ public class GameUICtrl : UIBase
     }
     #endregion
 
+    #region 设置界面事件
+    //打开设置界面
+    public void SetOpenOnClick(BaseEventData data)
+    {
+        set.SetActive(true);
+    }
+    //关闭设置界面
+    public void SetCloseOnClick(BaseEventData data)
+    {
+        set.SetActive(false);
+    }
+    //保存事件
+    public void SaveListen(BaseEventData data)
+    {
+        Player player = SaveManager.SavePlayerData();
+        string playerFilePath = Application.dataPath + "/Resources"+"/Data" + "/PlayerData.json";
+        string savePlayerData = JsonMapper.ToJson(player);
+        StreamWriter pw = new StreamWriter(playerFilePath);
+        pw.Write(savePlayerData);
+        pw.Close();
+        
+        string enemyFilePath = Application.dataPath + "/Resources" + "/Data" + "/EnemyData.json";
+        SaveManager.SaveEnemyData(enemyFilePath);
+        Debug.Log("保存成功");
+    }
+    //加载事件
+    public void ReadListen()
+    {
+
+
+        string enemyFilePath = Application.dataPath + "/Resources" + "/Data" + "/EnemyData.json";
+        if(File.Exists(enemyFilePath))
+        {
+            SaveManager.ReadEnemyData(enemyFilePath);
+        }
+
+    }
+
+
+    //加载设置界面的所有事件
+    public void SetListen(string openKey,string closeKey,string closePanel,string saveBtn,string readBtn)
+    {
+        AddPointClick(openKey, SetOpenOnClick);
+        AddPointClick(closeKey, SetCloseOnClick);
+        AddPointClick(saveBtn, SaveListen);
+    }
+    #endregion
+
     GameObject litMap;
+    GameObject set;
     void Start ()
     {
 
@@ -63,6 +113,12 @@ public class GameUICtrl : UIBase
         litMap = GetControl("LitMapInterface_N");
         LitMapListen("LitMap_N", "LitMapInterface_N");
         litMap.SetActive(false);
+        #endregion
+
+        #region 设置界面的加载
+        set = GetControl("SetInterface_N");
+        SetListen("Set_N","SetClose_N", "SetInterface_N","Save_N","Read_N");
+        set.SetActive(false);
         #endregion
 
         #region 摇杆的加载
