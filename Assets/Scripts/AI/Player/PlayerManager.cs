@@ -10,6 +10,7 @@ public class PlayerManager :MonoBehaviour
     {
         get { return tmpPlayer.GetComponent<PlayerCtrl>(); }
     }
+
     GameObject tmpPlayer;
     public Transform Player
     {
@@ -18,7 +19,7 @@ public class PlayerManager :MonoBehaviour
     Transform playerParent;
     public void Initial()
     {
-        Object tmpObj = Resources.Load("Model/Player/SapphiArtchan");
+        Object tmpObj = Resources.Load(PlayerData.path);
         tmpPlayer = Instantiate(tmpObj) as GameObject;
         tmpPlayer.transform.SetParent(playerParent);
         tmpPlayer.transform.position = GameObject.FindGameObjectWithTag("PlayerParent").transform.position;

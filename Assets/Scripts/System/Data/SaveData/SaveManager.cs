@@ -11,14 +11,19 @@ public class SaveManager
         Player player = new Player();
         player.blood = PlayerData.blood;
         player.hurt = PlayerData.hurt;
+        player.path = "";
         player.x = PlayerManager.Instance.Player.position.x;
         player.y = PlayerManager.Instance.Player.position.y;
         player.z = PlayerManager.Instance.Player.position.z;
 
         return player;
     }
-    public static void ReadPlayerData()
+    public static void ReadPlayerData(string playerFilePath)
     {
+        StreamReader sr = new StreamReader(playerFilePath);
+        string jsonStr = sr.ReadToEnd();
+        JsonData playerJson = JsonMapper.ToObject(jsonStr);
+        PlayerData.blood = (float)playerJson["blood"];
 
     }
 
@@ -33,7 +38,6 @@ public class SaveManager
 
         foreach (var item in EnemyManager.allEnemy)
         {
-            //enemys.Add(new Enemy { x = item.transform.position.x, y = item.transform.position.y, z = item.transform.position.z });
             JsonData enemy = new JsonData();
             enemys["name"] = item.name;
             enemy["x"] = item.transform.position.x;

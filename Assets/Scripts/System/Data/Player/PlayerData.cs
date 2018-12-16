@@ -8,6 +8,9 @@ public class PlayerData
     public static bool playerAttacked = false;
     #endregion
 
+    #region 模型路径
+    public static string path= "Model/Player/SapphiArtchan";
+    #endregion
     #region 玩家血量
     public static float bloodMax = 100;
     public static float blood = 100;

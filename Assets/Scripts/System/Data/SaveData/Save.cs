@@ -10,6 +10,7 @@ public class Player
 {
     public double blood;
     public double hurt;
+    public string path;
     public double x;
     public double y;
     public double z;
