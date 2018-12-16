@@ -39,11 +39,7 @@ public class GameUICtrl : UIBase
         AudioManager.Instance.StopAudio("A");
     }
 
-    #region 小地图开关事件
-    public void CloseLitMap(BaseEventData data)
-    {
-        litMap.SetActive(false);
-    }
+    #region 小地图按钮事件
     public void OpenLitMap(BaseEventData data)
     {
         litMap.SetActive(true);
@@ -52,20 +48,14 @@ public class GameUICtrl : UIBase
     {
         AddPointClick(openKey, OpenLitMap);
 
-        AddPointClick(closeName, CloseLitMap);
     }
     #endregion
 
-    #region 设置界面事件
+    #region 设置界面按钮事件
     //打开设置界面
     public void SetOpenOnClick(BaseEventData data)
     {
         set.SetActive(true);
-    }
-    //关闭设置界面
-    public void SetCloseOnClick(BaseEventData data)
-    {
-        set.SetActive(false);
     }
     //保存事件
     public void SaveListen(BaseEventData data)
@@ -99,7 +89,6 @@ public class GameUICtrl : UIBase
     public void SetListen(string openKey,string closeKey,string closePanel,string saveBtn,string readBtn)
     {
         AddPointClick(openKey, SetOpenOnClick);
-        AddPointClick(closeKey, SetCloseOnClick);
         AddPointClick(saveBtn, SaveListen);
     }
     #endregion

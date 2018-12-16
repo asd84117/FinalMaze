@@ -66,12 +66,8 @@ public class SourceManager
                 {
                     allSurplus.Add(allSource[i]);
                 }
-                   
             }
-           
-
         }
-
         for (int i = 0; i < allSurplus.Count; i++)
         {
             RemoveAudio(allSurplus[i]);

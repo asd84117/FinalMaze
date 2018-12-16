@@ -10,7 +10,8 @@ public class PlayerCtrl :AIBase
     public void ReduceBlood(float reduce)
     {
         PlayerData.blood -= reduce;
-        UIManager.Instance.GetChild("GameCanvas", "Blood_N").GetComponent<Slider>().value = PlayerData.blood/PlayerData.bloodMax;
+        Slider tmpBlood = UIManager.Instance.GetChild("GameInterface", "Blood_N").GetComponent<Slider>();
+        tmpBlood.value = PlayerData.blood / PlayerData.bloodMax;
         //GameUICtrl.ReduceBlood(reduce/100f);
     }
 
