@@ -8,12 +8,16 @@ public class PlayerData
     public static bool playerAttacked = false;
     #endregion
 
+
+    #region 玩家坐标
+    public static Vector3 playerPostion;
+    #endregion
     #region 模型路径
     public static string path= "Model/Player/SapphiArtchan";
     #endregion
     #region 玩家血量
-    public static float bloodMax = 100;
-    public static float blood = 100;
+    public static float bloodMax = 100f;
+    public static float blood = 100f;
     #endregion
     #region 玩家攻击伤害
     public static float hurt = 25;

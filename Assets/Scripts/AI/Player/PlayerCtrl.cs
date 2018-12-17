@@ -6,12 +6,15 @@ using UnityEngine.UI;
 
 public class PlayerCtrl :AIBase
 {
+    public static PlayerCtrl Instance;
+
     FSMManager fsmManager = new FSMManager((int)Data.AnimationCount.Max);
     public void ReduceBlood(float reduce)
     {
         PlayerData.blood -= reduce;
-        Slider tmpBlood = UIManager.Instance.GetChild("GameInterface", "Blood_N").GetComponent<Slider>();
-        tmpBlood.value = PlayerData.blood / PlayerData.bloodMax;
+        GameInterfaceCtrl.Instance.UpdataBlood();
+        //Slider tmpBlood = UIManager.Instance.GetChild("GameInterface", "Blood_N").GetComponent<Slider>();
+        //tmpBlood.value = PlayerData.blood / PlayerData.bloodMax;
         //GameUICtrl.ReduceBlood(reduce/100f);
     }
 
@@ -23,6 +26,7 @@ public class PlayerCtrl :AIBase
 
     private void Awake()
     {
+        Instance = this;
     }
     private void Start()
     {

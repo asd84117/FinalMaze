@@ -15,6 +15,7 @@ public class PlayerManager :MonoBehaviour
     public Transform Player
     {
         get { return tmpPlayer.transform; }
+        set { }
     }
     Transform playerParent;
     public void Initial()

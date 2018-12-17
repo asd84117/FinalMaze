@@ -36,7 +36,7 @@ public class EnemyTransform
     public double x;
     public double y;
     public double z;
-    public EnemyTransform(double tmpX,double tmpY,double tmpZ)
+    public EnemyTransform(double tmpX, double tmpY,double tmpZ)
     {
         x = tmpX;
         y = tmpY;
