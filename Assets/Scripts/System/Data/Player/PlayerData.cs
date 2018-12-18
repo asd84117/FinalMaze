@@ -13,7 +13,7 @@ public class PlayerData
     public static Vector3 playerPostion;
     #endregion
     #region 模型路径
-    public static string path= "Model/Player/SapphiArtchan";
+    public static string path= "Model/Player/KadukiSailorSuitBlackHair";
     #endregion
     #region 玩家血量
     public static float bloodMax = 100f;
