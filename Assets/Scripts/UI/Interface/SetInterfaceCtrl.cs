@@ -30,10 +30,15 @@ public class SetInterfaceCtrl : UIBase
     #region 加载事件
     public void ReadListen(BaseEventData data)
     {
+
         //加载玩家信息
         string playerFilePath = Application.dataPath + "/Resources" + "/Data" + "/PlayerData.json";
         if (File.Exists(playerFilePath))
         {
+            if (PlayerManager.Instance.Player != null)
+            {
+                PlayerCtrl.Instance.OnDestroy();
+            }
             SaveManager.ReadPlayerData(playerFilePath);
         }
 

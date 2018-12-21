@@ -23,7 +23,10 @@ public class EnemyAI : AIBase
     #region 怪物攻击和跟随检测
     public void EnemyAttack()
     {
-
+        if (PlayerManager.Instance.Player==null)
+        {
+            return; 
+        }
 
         Vector3 distance = PlayerManager.Instance.Player.position - transform.position;
         //检测距离

@@ -7,12 +7,13 @@ using UnityEngine.UI;
 public class GameInterfaceCtrl : UIBase
 {
     public static GameInterfaceCtrl Instance;
-
+    Easy easyTouch;
+    private GameObject player;
     #region EasyTouch功能的加载
     private void EasyTouchInitial(string path)
     {
         GameObject tmpEasyTouch = GetControl(path);
-        Easy easyTouch = new Easy(tmpEasyTouch.transform.position, tmpEasyTouch, 75, PlayerManager.Instance.Player.gameObject);
+        easyTouch = new Easy(tmpEasyTouch.transform.position, tmpEasyTouch, 75,player);
         AddDrag(path, easyTouch.OnDrag);
         AddOnEndDrag(path, easyTouch.OnEndDrag);
 
@@ -26,7 +27,10 @@ public class GameInterfaceCtrl : UIBase
     }
     private void OnClick(BaseEventData tmpBase)
     {
-        PlayerManager.Instance.PlayerCtrl.ChangeState((sbyte)Data.AnimationCount.Attack);
+        if (PlayerManager.Instance.Player!=null)
+        {
+            PlayerManager.Instance.PlayerCtrl.ChangeState((sbyte)Data.AnimationCount.Attack);
+        }
     }
     #endregion
 
@@ -56,9 +60,22 @@ public class GameInterfaceCtrl : UIBase
     private void Start()
     {
         Instance = this;
-        EasyTouchInitial("Image_N");
         SetInterfaceInitial("SetInterface_N", true);
         PlayerAttackInitial();
+    }
+
+    private void Update()
+    {
+
+        if (player==null)
+        {
+            easyTouch = null;
+            if (PlayerManager.Instance.Player != null)
+            {
+                player = PlayerManager.Instance.Player.gameObject;
+                EasyTouchInitial("Image_N");
+            }
+        }
     }
 
 }

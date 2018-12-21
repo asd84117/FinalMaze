@@ -7,8 +7,8 @@ public class CameraManager : MonoBehaviour
     Transform target;
     private void Awake()
     {
-        target = PlayerManager.Instance.Player;
-        transform.rotation = Quaternion.Euler(45, 0, 0);
+        //target = PlayerManager.Instance.Player;
+        //transform.rotation = Quaternion.Euler(45, 0, 0);
     }
     //Vector3 vector = Vector3.one;
     public Vector3 distance = new Vector3(0, 3.5f, -2.5f);
@@ -16,7 +16,16 @@ public class CameraManager : MonoBehaviour
     //float timeCount;
     private void LateUpdate()
     {
-        transform.position = target.position + distance;
+        if (target==null)
+        {
+            target = PlayerManager.Instance.Player;
+            transform.rotation = Quaternion.Euler(45, 0, 0);
+
+        }
+        else
+        {
+            transform.position = target.position + distance;
+        }
 
         //timeCount += Time.deltaTime;
         //if(timeCount<1.5f)

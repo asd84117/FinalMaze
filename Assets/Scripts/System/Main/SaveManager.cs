@@ -90,11 +90,11 @@ public class SaveManager
 
     public static void SetPlayer(Player player)
     {
+        PlayerManager.Instance.BuildPlayer();
         PlayerData.blood = (float)player.blood;
         PlayerData.hurt = (float)player.hurt;
         Vector3 tmpPlayer = new Vector3((float)player.x, (float)player.y, (float)player.z);
         PlayerManager.Instance.Player.position = tmpPlayer;
         GameInterfaceCtrl.Instance.UpdataBlood();
-        
     }
 }

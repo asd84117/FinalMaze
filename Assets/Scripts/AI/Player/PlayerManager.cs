@@ -14,23 +14,35 @@ public class PlayerManager :MonoBehaviour
     GameObject tmpPlayer;
     public Transform Player
     {
-        get { return tmpPlayer.transform; }
+        get
+        {
+            if (tmpPlayer!=null)
+            {
+                return tmpPlayer.transform;
+            }
+            return null;
+        }
         set { }
     }
     Transform playerParent;
-    public void Initial()
+
+    #region 创建一个玩家角色
+    public void BuildPlayer()
     {
         Object tmpObj = Resources.Load(PlayerData.path);
         tmpPlayer = Instantiate(tmpObj) as GameObject;
-        tmpPlayer.transform.SetParent(playerParent);
-        tmpPlayer.transform.position = GameObject.FindGameObjectWithTag("PlayerParent").transform.position;
-        tmpPlayer.AddComponent<PlayerBase>();
+        tmpPlayer.transform.SetParent(transform);
+        tmpPlayer.transform.position = transform.position;
+        tmpPlayer.AddComponent<PlayerCtrl>();
+
     }
+    #endregion
+
     private void Awake()
     {
         Instance = this;
         playerParent = GameObject.FindGameObjectWithTag("PlayerParent").transform;
-        Initial();
+        BuildPlayer();
     }
 
 }

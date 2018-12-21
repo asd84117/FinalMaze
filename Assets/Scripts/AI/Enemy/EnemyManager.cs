@@ -21,7 +21,7 @@ public class EnemyManager : MonoBehaviour
     }
     public static List<EnemyAI> allEnemy;
 
-    //检测被攻击
+    //检测被攻击  在玩家攻击时检测!!!!!
     public void AttackedByPlayer()
     {
         for (int i = 0; i < allEnemy.Count; i++)
@@ -40,7 +40,7 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    //生成敌人，传入资源路径，父类位置，返回生成的物体
+    #region 生成敌人，传入资源路径，父类位置，返回生成的物体
     public GameObject BuildEnemy(string path,Transform parent)
     {
         Object tmpObj = Resources.Load(path);
@@ -56,6 +56,7 @@ public class EnemyManager : MonoBehaviour
         allEnemy.Add(tmpEnemyAI);
         return tmpEnemy;
     }
+    #endregion
 
     //怪物的日常行为
     public void EnemyBehaviour()
