@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager instance;
-    Attack attack;
 
     Transform player =null;
     public Transform Player
@@ -27,12 +26,12 @@ public class EnemyManager : MonoBehaviour
         for (int i = 0; i < allEnemy.Count; i++)
         {
             EnemyAI tmpEnemy = allEnemy[i].GetComponent<EnemyAI>();
-            if(attack.SquareAttack(player,tmpEnemy.transform,PlayerData.forwordDistance,PlayerData.rightDistance))
+            if(Attack.SquareAttack(player,tmpEnemy.transform,PlayerData.forwordDistance,PlayerData.rightDistance))
             {
                 tmpEnemy.ChangeState((sbyte)Data.AnimationCount.Attacked);
                 tmpEnemy.ReduceBlood(PlayerData.hurt);
             }
-            if (attack.SectorAttack(player,tmpEnemy.transform,PlayerData.radius,PlayerData.angle))
+            if (Attack.SectorAttack(player,tmpEnemy.transform,PlayerData.radius,PlayerData.angle))
             {
                 tmpEnemy.ChangeState((sbyte)Data.AnimationCount.Attacked);
                 tmpEnemy.ReduceBlood(PlayerData.hurt);
@@ -73,7 +72,6 @@ public class EnemyManager : MonoBehaviour
     private void Awake()
     {
 
-        attack = new Attack();
         allEnemy = new List<EnemyAI>();
 
         Transform enemyTransform = GameObject.Find("Enemy").transform;

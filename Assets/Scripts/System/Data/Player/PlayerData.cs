@@ -37,5 +37,9 @@ public class PlayerData
     //攻击宽度
     public static float rightDistance = 1;
     #endregion
+    #region 自身圆形攻击数据
+    //攻击半径
+    public static float pi= 3;
+    #endregion
 
 }

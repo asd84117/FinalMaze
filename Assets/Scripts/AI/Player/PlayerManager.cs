@@ -31,8 +31,8 @@ public class PlayerManager :MonoBehaviour
     {
         Object tmpObj = Resources.Load(PlayerData.path);
         tmpPlayer = Instantiate(tmpObj) as GameObject;
-        tmpPlayer.transform.SetParent(transform);
-        tmpPlayer.transform.position = transform.position;
+        tmpPlayer.transform.SetParent(playerParent);
+        tmpPlayer.transform.position = playerParent.position;
         tmpPlayer.AddComponent<PlayerCtrl>();
 
     }

@@ -37,10 +37,8 @@ public class Easy
         {
             tmpRocker.transform.position = tmpCore + tmpDistance.normalized * tmpRadius;
         }
-        Debug.Log(PlayerData.blood+"   "+ !PlayerData.playerAttacked);
         if (PlayerData.blood!=0&&!PlayerData.playerAttacked)
         {
-            Debug.Log("Yeah");
             Vector2 rocker = tmpPlayer.transform.localEulerAngles;
             rocker.y = 90 - Mathf.Atan2(tmpDistance.y, tmpDistance.x) * Mathf.Rad2Deg;
             tmpPlayer.transform.localEulerAngles = rocker;

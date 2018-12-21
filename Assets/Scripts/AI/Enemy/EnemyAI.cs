@@ -5,8 +5,6 @@ using UnityEngine;
 public class EnemyAI : AIBase
 {
     public EnemyData enemyData;
-    public Attack attack;
-
     public override void Initial()
     {
         base.Initial();
@@ -41,7 +39,7 @@ public class EnemyAI : AIBase
 
                     enemyData.LastAttackTime = Time.time;
                     fsmManager.ChangeState((sbyte)Data.AnimationCount.Attack);
-                    if (attack.SquareAttack(transform, PlayerManager.Instance.Player, enemyData.ForwordDistance, enemyData.RightDistance))
+                    if (Attack.SquareAttack(transform, PlayerManager.Instance.Player, enemyData.ForwordDistance, enemyData.RightDistance))
                     {
                         PlayerManager.Instance.PlayerCtrl.ReduceBlood(enemyData.Hurt);
                         PlayerData.playerAttacked = true;
@@ -77,7 +75,6 @@ public class EnemyAI : AIBase
         Initial();
         fsmManager = new FSMManager((int)Data.AnimationCount.Max);
         animator = transform.GetComponent<Animator>();
-        attack = new Attack();
         
 
         EnemyIdel enemyIdel = new EnemyIdel(animator);
