@@ -17,6 +17,10 @@ public class UIBase : MonoBehaviour
             {
                 tmpChild[i].gameObject.AddComponent<UIBehaviour>();
             }
+            if (tmpChild[i].name.StartsWith("Slot"))
+            {
+                tmpChild[i].gameObject.AddComponent<Slot>();
+            }
         }
     }
     public GameObject GetControl(string controlName)

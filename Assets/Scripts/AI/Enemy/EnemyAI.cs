@@ -9,35 +9,29 @@ public class EnemyAI : AIBase
     {
         base.Initial();
         enemyData = new EnemyData();
-        //attack = new Attack();
     }
+
     //掉血，传入掉的血量
     public void ReduceBlood(float reduce)
     {
         enemyData.Blood -= reduce;
     }
-    public float timeCount = 0;
-
     #region 怪物攻击和跟随检测
     public void EnemyAttack()
     {
-        if (PlayerManager.Instance.Player==null)
+        if (PlayerManager.Instance.Player == null)
         {
-            return; 
+            return;
         }
 
         Vector3 distance = PlayerManager.Instance.Player.position - transform.position;
         //检测距离
-        if(distance.magnitude< enemyData.FollowDistance&&PlayerData.blood!=0)
+        if (distance.magnitude < enemyData.FollowDistance && PlayerData.blood != 0)
         {
             if (distance.magnitude <= enemyData.AttackDistance)
             {
-                timeCount += Time.deltaTime;
-
-                if (Time.time - enemyData.LastAttackTime > enemyData.AttackCD)
+                if (TimeManager.TimeCount(enemyData.AttackCD))
                 {
-
-                    enemyData.LastAttackTime = Time.time;
                     fsmManager.ChangeState((sbyte)Data.AnimationCount.Attack);
                     if (Attack.SquareAttack(transform, PlayerManager.Instance.Player, enemyData.ForwordDistance, enemyData.RightDistance))
                     {
@@ -53,9 +47,10 @@ public class EnemyAI : AIBase
             {
                 transform.LookAt(PlayerManager.Instance.Player);
                 fsmManager.ChangeState((sbyte)Data.AnimationCount.Run);
-                SimpleMove(distance.normalized* enemyData.MoveSpeed*Time.deltaTime);
+                SimpleMove(distance.normalized * enemyData.MoveSpeed * Time.deltaTime);
             }
-        }else
+        }
+        else
         {
             fsmManager.ChangeState((sbyte)Data.AnimationCount.Idel);
         }
@@ -65,7 +60,7 @@ public class EnemyAI : AIBase
 
     FSMManager fsmManager;
     Animator animator;
-
+    CharacterController control;
     public override void ChangeState(sbyte tmpState)
     {
         fsmManager.ChangeState(tmpState);
@@ -75,7 +70,10 @@ public class EnemyAI : AIBase
         Initial();
         fsmManager = new FSMManager((int)Data.AnimationCount.Max);
         animator = transform.GetComponent<Animator>();
-        
+        control = transform.GetComponent<CharacterController>();
+        control.center = new Vector3(0, 1, 0);
+        control.height = 2;
+        control.radius = 0.23f;
 
         EnemyIdel enemyIdel = new EnemyIdel(animator);
         fsmManager.AddState(enemyIdel);

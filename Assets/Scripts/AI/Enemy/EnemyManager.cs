@@ -46,7 +46,7 @@ public class EnemyManager : MonoBehaviour
         GameObject tmpEnemy = GameObject.Instantiate(tmpObj) as GameObject;
         tmpEnemy.transform.SetParent(parent);
         tmpEnemy.AddComponent<EnemyAI>();
-        tmpEnemy.AddComponent<EnemyBase>();
+
 
         tmpEnemy.transform.position = parent.position;
 

@@ -44,7 +44,7 @@ public class GameInterfaceCtrl : UIBase
 
     #region 界面打开事件
     //设置界面的打开
-    private void SetInterfaceInitial(string interfaceName,bool tmpBool)
+    private void SetInterfaceInitial()
     {
         AddPointClick("Set_N", SetOnClick);
     }
@@ -60,13 +60,17 @@ public class GameInterfaceCtrl : UIBase
     private void Start()
     {
         Instance = this;
-        SetInterfaceInitial("SetInterface_N", true);
+
+        //设置界面
+        SetInterfaceInitial();
+
+        //角色攻击按钮
         PlayerAttackInitial();
     }
 
     private void Update()
     {
-
+        //判断是否能够控制移动
         if (player==null)
         {
             easyTouch = null;

@@ -64,16 +64,8 @@ public class PlayerAttack : FSMBase
         //改参数作动画
         animator.SetInteger("Index", 3);
     }
-    float timeCount;
     public override void OnStay()
     {
-        
-        timeCount += Time.deltaTime;
-        if(timeCount>0.24f)
-        {
-            PlayerManager.Instance.PlayerCtrl.ChangeState((sbyte)Data.AnimationCount.Idel);
-            timeCount = 0;
-        }
     }
 }
 
