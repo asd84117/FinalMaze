@@ -75,7 +75,7 @@ public class UIBase : MonoBehaviour
     //点击事件添加方法
     public void AddPointClick(string controlName, UnityAction<BaseEventData> action)
     {
-
+        
         UIBehaviour tmpBehaviour = GetBehaviour(controlName);
 
         if (tmpBehaviour != null)
